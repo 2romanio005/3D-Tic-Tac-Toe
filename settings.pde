@@ -1,6 +1,6 @@
 
-int size = 5;       // размер куба(клеток)
-int vinNamber = 2;  // количество одинаковых в ряд для победы
+int size = 1;       // размер куба(клеток)
+int vinNamber = 1;  // количество одинаковых в ряд для победы
 float speed = 0.75; // скорость кручения(от 0 до 1)
 byte namberPlayers = 2; //количество игроков
 
@@ -22,14 +22,15 @@ int rotZ = 0;
 byte top = 4;
 byte topBefore = 4;
 
-byte [][][] input;
+byte [][][] input = new byte[size][size][size];
 
 int namberClick = 0;
 long counterClick;
 
 boolean flag_no_draw = false;
 boolean flag_no_draw_before = false;
-
+boolean flag_load = false;
+boolean flag_load_vin = false;
 
 MySlider sizeSlider = new MySlider("Размер поля", 8.0, 1.0, 50.0, 1.0);
 MySlider vinNamberSlider = new MySlider("Требуется в ряд для победы", 5.0, 1.0, 8.0, 1.0);
@@ -39,13 +40,20 @@ MySlider speedSlider = new MySlider("Чувствительность прокр
 
 
 void reset() {
-  for (int i = 0; i < size; ++i) {
-    for (int j = 0; j < size; ++j) {
-      for (int h = 0; h < size; ++h) {
-        input[i][j][h] = 0;
+  if (flag_load == false) {
+    for (int i = 0; i < size; ++i) {
+      for (int j = 0; j < size; ++j) {
+        for (int h = 0; h < size; ++h) {
+          input[i][j][h] = 0;
+        }
       }
     }
+    move = 1;
   }
+  flag_load = false;
+
+
+
   flag_no_draw = false;
   namberClick = 0;
 
@@ -54,8 +62,8 @@ void reset() {
 
   activeSize = size;
   activeInput = true;
-  vin = false;
-  move = 1;
+  vin = flag_load_vin;
+  flag_load_vin = false;
 
   rotX = 250;  // 250
   rotY = 50;  // 45 

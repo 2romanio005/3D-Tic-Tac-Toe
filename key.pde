@@ -13,15 +13,31 @@ void keyPressed() {
       flag_no_draw = !flag_no_draw;
       break;
     case TAB:
-      cp5.get(Button.class, "play").show();
+      if (playActive) {
+        cp5.get(Button.class, "play").show();
+        cp5.get(Button.class, "play").show();
+        cp5.get(Button.class, "save").show();
+        cp5.get(Button.class, "load").show();
 
-      playActive = false;
-      break;
-    case ENTER:
-      if (playActive == false) {
-        play();
+        cp5.get(Textfield.class, " ").show();
+        cp5.get(Textfield.class, "  ").show();
+      } else {
+        cp5.get(Button.class, "play").hide();
+        cp5.get(Button.class, "play").hide();
+        cp5.get(Button.class, "save").hide();
+        cp5.get(Button.class, "load").hide();
+
+        cp5.get(Textfield.class, " ").hide();
+        cp5.get(Textfield.class, "  ").hide();
       }
+
+      playActive = !playActive;
       break;
+    //case ENTER:
+      //if (playActive == false) {
+      //  play();
+      //}
+      //break;
     case CODED:
       if (keyCode == UP || keyCode == DOWN || keyCode == LEFT || keyCode == RIGHT) {
         if (rotX % 90 == 0 && rotY % 90 == 0) {
