@@ -1,8 +1,5 @@
 void contropOutGO() {
-  noFill();
   cursor();
-
-  outPlayers();
 
   int tmp_rotX = 0, tmp_rotY = 0;
   int minI = 0, minJ = 0, minH = 0, maxI = size, maxJ = size, maxH = size;
@@ -113,8 +110,6 @@ void contropOutGO() {
         if (!(h < minH)) {
           box(sizeStep, sizeStep, sizeStep);
           //outToken(tmp++);
-          //if (tmp == 5) tmp = 1;
-
           if (outToken(input[i][j][h]) == false) {
             int tmp_X_min = 0, tmp_X_max = 0, tmp_Y_min = 0, tmp_Y_max = 0;
             int X_tmp = 0, Y_tmp = 0, tmp_stepSize = (sizeStep + round(sizeStep * errore_cord_share));
@@ -276,6 +271,7 @@ void contropOutGO() {
                 namberClick = 0;
                 if (++move > namberPlayers) move = 1;
                 activeInput = true;
+                //flag_no_draw = flag_no_draw_before;
 
                 if (search_vin(i, j, h, 0, 0, 1, search) >= vinNamber) vin = true;    // 1
                 if (search_vin(i, j, h, 0, 1, 0, search) >= vinNamber) vin = true;    // 2

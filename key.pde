@@ -5,27 +5,22 @@ void keyPressed() {
     case ' ':
       if (vin == false) {
         activeInput = false;
+        flag_no_draw_before = flag_no_draw;
         flag_no_draw = false;
-        //println("spase");
       }
       break;
     case BACKSPACE:
       flag_no_draw = !flag_no_draw;
       break;
     case TAB:
-      //reset();
-
-      sliderSize.show();
-      cp5.get(Slider.class, "Win_namber").show();
-      cp5.get(Slider.class, "Namber_players").show();
-      cp5.get(Slider.class, "Sensibility").show();
-
       cp5.get(Button.class, "play").show();
 
       playActive = false;
       break;
     case ENTER:
-      play();
+      if (playActive == false) {
+        play();
+      }
       break;
     case CODED:
       if (keyCode == UP || keyCode == DOWN || keyCode == LEFT || keyCode == RIGHT) {
@@ -138,6 +133,7 @@ void keyPressed() {
     }
   } else {
     activeInput = true;
+    flag_no_draw = flag_no_draw_before;
   }
 }
 

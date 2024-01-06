@@ -1,11 +1,8 @@
 
 int size = 5;       // размер куба(клеток)
-int Size_map = 5;
-Slider sliderSize;
-
 int vinNamber = 2;  // количество одинаковых в ряд для победы
 float speed = 0.75; // скорость кручения(от 0 до 1)
-byte namberPlayers = 2;
+byte namberPlayers = 2; //количество игроков
 
 int sizeStep = 33;  // размер одной клетки куба(в пикселях)
 float errore_cord_share = 0.2; // чтобы нормально работал выбор ячейки
@@ -15,7 +12,7 @@ float errore_cord_share = 0.2; // чтобы нормально работал �
 int activeSize = size;
 boolean activeInput = true;
 boolean vin = false;
-boolean playActive = false;   //!!!!!!!!!!!!!!!!!!!!!!!!!
+boolean playActive = false; 
 byte move = 1;
 
 int rotX = 250;  // 250
@@ -31,12 +28,13 @@ int namberClick = 0;
 long counterClick;
 
 boolean flag_no_draw = false;
+boolean flag_no_draw_before = false;
 
 
-//  public MySlider(String name, int startX, int startY, int sizeX, int sizeY, float value, float min, float max, float step) {
-  MySlider test = new MySlider("test", 600, 200, 400, 30, 0.75, 0.1, 2.0, 0.01);
-  MySlider test2 = new MySlider("test", 600, 140, 400, 30, 2.0, 2.0, 8.0, 1.0);
-  //boolean MySliderClick = false;
+MySlider sizeSlider = new MySlider("Размер поля", 8.0, 1.0, 50.0, 1.0);
+MySlider vinNamberSlider = new MySlider("Требуется в ряд для победы", 5.0, 1.0, 8.0, 1.0);
+MySlider namberPlayersSlider = new MySlider("Количество игроков", 2.0, 2.0, 4.0, 1.0);
+MySlider speedSlider = new MySlider("Чувствительность прокрутки", 0.75, 0.1, 2.0, 0.01);
 
 
 
@@ -63,6 +61,6 @@ void reset() {
   rotY = 50;  // 45 
 
   sizeStep = 33;
-  
+
   cursor();
 }

@@ -34,7 +34,6 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {
   if (activeInput == false) {
     ++namberClick;
-    //println("click " + namberClick);
     counterClick = millis() + 500;
   }
   //MySliderClick = true;
@@ -43,23 +42,16 @@ void mouseClicked() {
 void controlMouse() {
   if (millis() > counterClick) {
     namberClick = 0;
-    //MySliderClick = false;
   }
 
   if (mousePressed) {
-    println("test");
     if (activeInput) {
-      //print(rotX + "\t");
-      //print(rotY + "\t");
-
       int tmp = round(rotX + (pmouseY - mouseY) * speed);
       rotX = tmp < 0 ? 360 + tmp : tmp % 360;
       tmp = round(rotY - (pmouseX - mouseX) * speed);
       rotY = tmp < 0 ? 360 + tmp : tmp % 360;
 
       searchActive();
-
-      //println(top);
     }
   }
 }

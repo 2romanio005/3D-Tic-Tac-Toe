@@ -1,13 +1,9 @@
 
 void controlOutPlay() {
-  noFill();
   cursor();
-
-  outPlayers();
 
   rotateX(radians(rotX));
   rotateZ(radians(rotY));
-  //rotateZ(radians(rotZ));
 
   //stroke(255, 0, 0);
   //box(3000, 0, 0);
@@ -160,32 +156,4 @@ boolean outToken(byte type) {
   sphere(sizeStep / 4.0);
   stroke(0, 20);
   return true;
-}
-
-void outPlayers() {
-  fill(0);
-  text("Active player:", CENTER - 150 + displayWidth / 2, CENTER + 50 - displayHeight / 2);
-  textSize(26);
-  for (byte i = 0; i < namberPlayers; ++i) {
-    switch((move - 1 + i) % namberPlayers) {
-    case 0:
-      fill(0, 255, 0);
-      text("Player №1", CENTER - 100 + displayWidth / 2, CENTER + 100 + 35 * i - displayHeight / 2);
-      break;
-    case 1:
-      fill(255, 0, 0);
-      text("Player №2", CENTER - 100 + displayWidth / 2, CENTER + 100 + 35 * i - displayHeight / 2);
-      break;
-    case 2:
-      fill(0, 0, 255);
-      text("Player №3", CENTER - 100 + displayWidth / 2, CENTER + 100 + 35 * i - displayHeight / 2);
-      break;
-    case 3:
-      fill(255, 127, 255);
-      text("Player №4", CENTER - 100 + displayWidth / 2, CENTER + 100 + 35 * i - displayHeight / 2);
-      break;
-    }
-  }
-  textSize(35);
-  noFill();
 }
