@@ -1,15 +1,19 @@
 import controlP5.*;
 ControlP5 cp5;
 void setup() {
-  //size(1000, 500, P3D);
+  size(1000, 500, P3D);
   //size(displayWidth, displayHeight, P3D);
-  fullScreen(P3D);
+  //fullScreen(P3D);
   frameRate(80);
   textSize(35);
   textAlign(CENTER);
   PFont font = createFont("arial", 20);
   //noFill();
   cp5 = new ControlP5(this);
+
+
+
+
 
   sliderSize = cp5.addSlider("Size_map")
     .setPosition(displayWidth / 2 - 270, displayHeight / 4 )
@@ -22,12 +26,12 @@ void setup() {
     ;
   cp5.addSlider("Win_namber")
     .setPosition(displayWidth / 2 - 270, displayHeight / 8 * 3 )
-    .setRange(1, 8)
+    .setRange(1, 30)
     .setWidth(500)
     .setHeight(30)
     .setFont(font)
     .setValue(5)
-    .setNumberOfTickMarks(8)
+    .setNumberOfTickMarks(29)
     ;
   cp5.addSlider("Namber_players")
     .setPosition(displayWidth / 2 - 270, displayHeight / 2 )
@@ -53,6 +57,9 @@ void setup() {
     .setImages(imgs)
     .updateSize()
     ;
+ // play();
+   test.drawSeparator(false);
+  test.setMax(2.5);
 }
 
 
@@ -94,7 +101,11 @@ void draw() {
     cp5.get(Slider.class, "Win_namber").setNumberOfTickMarks(Size_map);
 
     background(150, 100, 240);
+    //background(255);
   }
+  test.tick();
+
+  test2.tick();
 }
 
 

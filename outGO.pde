@@ -1,7 +1,9 @@
 void contropOutGO() {
   noFill();
   cursor();
-  
+
+  outPlayers();
+
   int tmp_rotX = 0, tmp_rotY = 0;
   int minI = 0, minJ = 0, minH = 0, maxI = size, maxJ = size, maxH = size;
   byte tmp_top = activeSize != size ? topBefore : top;
@@ -272,7 +274,7 @@ void contropOutGO() {
                 activeSize = size;
                 input[i][j][h] = search;
                 namberClick = 0;
-                if(++move > namberPlayers) move = 1;
+                if (++move > namberPlayers) move = 1;
                 activeInput = true;
 
                 if (search_vin(i, j, h, 0, 0, 1, search) >= vinNamber) vin = true;    // 1

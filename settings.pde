@@ -15,7 +15,7 @@ float errore_cord_share = 0.2; // чтобы нормально работал �
 int activeSize = size;
 boolean activeInput = true;
 boolean vin = false;
-boolean playActive = false;
+boolean playActive = false;   //!!!!!!!!!!!!!!!!!!!!!!!!!
 byte move = 1;
 
 int rotX = 250;  // 250
@@ -33,8 +33,10 @@ long counterClick;
 boolean flag_no_draw = false;
 
 
-
-
+//  public MySlider(String name, int startX, int startY, int sizeX, int sizeY, float value, float min, float max, float step) {
+  MySlider test = new MySlider("test", 600, 200, 400, 30, 0.75, 0.1, 2.0, 0.01);
+  MySlider test2 = new MySlider("test", 600, 140, 400, 30, 2.0, 2.0, 8.0, 1.0);
+  //boolean MySliderClick = false;
 
 
 

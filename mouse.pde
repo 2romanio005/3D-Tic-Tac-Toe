@@ -34,17 +34,20 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {
   if (activeInput == false) {
     ++namberClick;
-    counterClick = millis() + 500;
     //println("click " + namberClick);
+    counterClick = millis() + 500;
   }
+  //MySliderClick = true;
 }
 
 void controlMouse() {
   if (millis() > counterClick) {
     namberClick = 0;
+    //MySliderClick = false;
   }
 
   if (mousePressed) {
+    println("test");
     if (activeInput) {
       //print(rotX + "\t");
       //print(rotY + "\t");
