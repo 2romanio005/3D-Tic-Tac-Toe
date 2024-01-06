@@ -1,6 +1,7 @@
 void contropOutGO() {
   noFill();
-  noCursor();
+  cursor();
+  
   int tmp_rotX = 0, tmp_rotY = 0;
   int minI = 0, minJ = 0, minH = 0, maxI = size, maxJ = size, maxH = size;
   byte tmp_top = activeSize != size ? topBefore : top;

@@ -2,8 +2,9 @@ import controlP5.*;
 ControlP5 cp5;
 void setup() {
   //size(1000, 500, P3D);
-  size(displayWidth, displayHeight, P3D);
-  frameRate(60);
+  //size(displayWidth, displayHeight, P3D);
+  fullScreen(P3D);
+  frameRate(80);
   textSize(35);
   textAlign(CENTER);
   PFont font = createFont("arial", 20);
@@ -11,7 +12,7 @@ void setup() {
   cp5 = new ControlP5(this);
 
   sliderSize = cp5.addSlider("Size_map")
-    .setPosition(displayWidth / 2 - 250, displayHeight / 8 * 2 )
+    .setPosition(displayWidth / 2 - 270, displayHeight / 4 )
     .setRange(2, 30)
     .setWidth(500)
     .setHeight(30)
@@ -20,7 +21,7 @@ void setup() {
     .setNumberOfTickMarks(29)
     ;
   cp5.addSlider("Win_namber")
-    .setPosition(displayWidth / 2 - 250, displayHeight / 8 * 3 )
+    .setPosition(displayWidth / 2 - 270, displayHeight / 8 * 3 )
     .setRange(1, 8)
     .setWidth(500)
     .setHeight(30)
@@ -29,7 +30,7 @@ void setup() {
     .setNumberOfTickMarks(8)
     ;
   cp5.addSlider("Namber_players")
-    .setPosition(displayWidth / 2 - 250, displayHeight / 8 * 4 )
+    .setPosition(displayWidth / 2 - 270, displayHeight / 2 )
     .setRange(2, 4)
     .setWidth(500)
     .setHeight(30)
@@ -38,7 +39,7 @@ void setup() {
     .setNumberOfTickMarks(3)
     ;
   cp5.addSlider("Sensibility")
-    .setPosition(displayWidth / 2 - 250, displayHeight / 8 * 5 )
+    .setPosition(displayWidth / 2 - 270, displayHeight / 8 * 5 )
     .setRange(0.1, 2)
     .setWidth(500)
     .setHeight(30)
