@@ -1,9 +1,20 @@
  //<>//
 void play() {
   size = int(sizeSlider.getValue());
+  
+  
   if (flag_load == false) {
     input = new byte[size][size][size];
+    int tmp = int(voidSlider.getValue());
+    for(byte i = 0; i < size; ++i){
+      for(byte j = 0; j < size; ++j){
+        for(byte h = 0; h < size; ++h){
+          if(int(random(100)) < tmp) input[i][j][h] = 5;
+        }  
+      }  
+    }  
   }
+  
   vinNamber = int(vinNamberSlider.getValue());
   namberPlayers = byte(namberPlayersSlider.getValue());
   speed = speedSlider.getValue();

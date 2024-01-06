@@ -36,6 +36,7 @@ MySlider sizeSlider = new MySlider("Размер поля", 8.0, 1.0, 50.0, 1.0)
 MySlider vinNamberSlider = new MySlider("Требуется в ряд для победы", 5.0, 1.0, 8.0, 1.0);
 MySlider namberPlayersSlider = new MySlider("Количество игроков", 2.0, 2.0, 4.0, 1.0);
 MySlider speedSlider = new MySlider("Чувствительность прокрутки", 0.75, 0.1, 2.0, 0.01);
+MySlider voidSlider = new MySlider("Процент отсутствующих клеточек", 0.0, 0.0, 100.0, 1.0);
 
 
 

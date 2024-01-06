@@ -10,13 +10,18 @@ void setup() {
   textSize(35);
   //textAlign(CENTER);
 
-  sizeSlider.setSize(displayWidth / 2 - 250, displayHeight / 4, 500, 30);
-  vinNamberSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 3, 500, 30);
-  namberPlayersSlider.setSize(displayWidth / 2 - 250, displayHeight / 2, 500, 30);
+  sizeSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 1, 500, 30);
+  vinNamberSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 2, 500, 30);
+  voidSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 3, 500, 30);
+  voidSlider.drawSeparator(false);
+  namberPlayersSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 4, 500, 30);
   speedSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 5, 500, 30);
   speedSlider.drawSeparator(false);
 
-
+  /// 4        2/8
+  /// 3/8
+  /// 2        4/8
+  /// 5/8
 
 
 
@@ -78,16 +83,18 @@ void draw() {
 
     translate(displayWidth / 2, displayHeight / 2, 0);
     if (activeInput) {
-      controlOutPlay();
+      controlOutPlay();    // крутить кубик
     } else {
-      contropOutGO();
+      contropOutGO();      // походить
     }
   } else {
     background(150, 100, 240);
     drawExit();
 
     if (sizeSlider.tick()) vinNamberSlider.setMax(sizeSlider.getValue());
+    
     vinNamberSlider.tick();
+    voidSlider.tick();
     namberPlayersSlider.tick();
     speedSlider.tick();
   }

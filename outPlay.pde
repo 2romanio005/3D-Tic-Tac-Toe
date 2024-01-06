@@ -99,7 +99,7 @@ void controlOutPlay() {
         }
         for (int h = 0; h < maxH; ++h) {
           if (!(h < minH)) {
-            if (flag_no_draw == false) {
+            if (flag_no_draw == false && input[i][j][h] != 5) {
               box(sizeStep, sizeStep, sizeStep);
             }
             outToken(input[i][j][h]);
