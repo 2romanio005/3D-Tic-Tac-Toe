@@ -10,35 +10,38 @@ void setup() {
   textSize(35);
   //textAlign(CENTER);
 
-  sizeSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 1, 500, 30);
-  vinNamberSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 2, 500, 30);
-  voidSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 3, 500, 30);
+  float tmp_start = 0.5;
+  float tmp_fin = 9;
+
+
+  sizeSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (1 + tmp_start), 500, 30);
+  vinNamberSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (2 + tmp_start), 500, 30);
+  voidSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (3 + tmp_start), 500, 30);
   voidSlider.drawSeparator(false);
-  namberPlayersSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 4, 500, 30);
-  speedSlider.setSize(displayWidth / 2 - 250, displayHeight / 8 * 5, 500, 30);
+  timeSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (4 + tmp_start), 500, 30);
+  timeSlider.drawSeparator(false);
+  namberPlayersSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (5 + tmp_start), 500, 30);
+  speedSlider.setSize(displayWidth / 2 - 250, displayHeight / tmp_fin * (6 + tmp_start), 500, 30);
   speedSlider.drawSeparator(false);
 
-  /// 4        2/8
-  /// 3/8
-  /// 2        4/8
-  /// 5/8
+
 
 
 
   cp5 = new ControlP5(this);
   //PImage[] imgs =;
   cp5.addButton("play")
-    .setPosition(displayWidth / 2 - 50, displayHeight / 4 * 3 - 50)
+    .setPosition(displayWidth / 2 - 50, displayHeight / tmp_fin * (7 + tmp_start) - 50)
     .setImages(loadImage("button_a.png"), loadImage("button_b.png"), loadImage("button_c.png"))
     .updateSize()
     ;
   cp5.addButton("save")
-    .setPosition(displayWidth / 2 - 225, displayHeight / 4 * 3 - 20)
+    .setPosition(displayWidth / 2 - 225, displayHeight / tmp_fin * (7 + tmp_start) - 20)
     .setImages(loadImage("save_a.png"), loadImage("save_b.png"), loadImage("save_c.png"))
     .updateSize()
     ;
   cp5.addButton("load")
-    .setPosition(displayWidth / 2 + 75, displayHeight / 4 * 3 - 20)
+    .setPosition(displayWidth / 2 + 75, displayHeight / tmp_fin * (7 + tmp_start) - 20)
     .setImages(loadImage("load_a.png"), loadImage("load_b.png"), loadImage("load_c.png"))
     .updateSize()
     ;
@@ -46,7 +49,7 @@ void setup() {
 
   PFont font = createFont("arial", 20);
   cp5.addTextfield(" ")
-    .setPosition(displayWidth / 2 - 225, displayHeight / 4 * 3 - 50)
+    .setPosition(displayWidth / 2 - 225, displayHeight / tmp_fin * (7 + tmp_start) - 50)
     .setSize(150, 30)
     .setFont(font)
     .setAutoClear(false) 
@@ -55,7 +58,7 @@ void setup() {
     //.setColor(color(255, 0, 0))
     ;  
   cp5.addTextfield("  ")
-    .setPosition(displayWidth / 2 + 75, displayHeight / 4 * 3 - 50)
+    .setPosition(displayWidth / 2 + 75, displayHeight / tmp_fin * (7 + tmp_start) - 50)
     .setSize(150, 30)
     .setFont(font)
     .setAutoClear(false) 
@@ -77,6 +80,12 @@ void draw() {
     if (vin) {
       outVin();
     }
+    if((timeMax != 0) && (millis() - timer >= timeMax)){
+      activeSize = size;
+      activeInput = true;
+      if (++move > namberPlayers) move = 1;
+      timer = millis();
+    }
 
     outPlayers();
     drawExit();
@@ -95,6 +104,7 @@ void draw() {
     
     vinNamberSlider.tick();
     voidSlider.tick();
+    timeSlider.tick();
     namberPlayersSlider.tick();
     speedSlider.tick();
   }

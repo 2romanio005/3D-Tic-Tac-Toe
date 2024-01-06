@@ -109,171 +109,175 @@ void contropOutGO() {
       }
       for (int h = 0; h < maxH; ++h) {
         if (!(h < minH)) {
-          box(sizeStep, sizeStep, sizeStep);
+          if(input[i][j][h] != 9){
+            box(sizeStep, sizeStep, sizeStep);
+          }
+          outToken(input[i][j][h]);
           //outToken(tmp++);
-          if (outToken(input[i][j][h]) == false) {
-            int tmp_X_min = 0, tmp_X_max = 0, tmp_Y_min = 0, tmp_Y_max = 0;
-            int X_tmp = 0, Y_tmp = 0, tmp_stepSize = (sizeStep + round(sizeStep * errore_cord_share));
-            switch(tmp_top) {
-            case 1:
-              switch(rotY / 45) {
-              case 1: 
-              case 2:
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;       // 90
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * j;
-                tmp_Y_min = Y_tmp + tmp_stepSize * h;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (h + 1);
-                break;
-              case 3: 
-              case 4:
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;       // 180
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * h;
-                tmp_Y_min = Y_tmp - tmp_stepSize * (j + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * j;
-                break;
-              case 5: 
-              case 6:
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;       // 270
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * j;
-                tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
-                tmp_Y_min = Y_tmp - tmp_stepSize * (h + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * h;
-                break;
-              default:
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;       // 0
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * h;
-                tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
-                tmp_Y_min = Y_tmp + tmp_stepSize * j;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (j + 1);
-                break;
-              }
-              break;
+          int tmp_X_min = 0, tmp_X_max = 0, tmp_Y_min = 0, tmp_Y_max = 0;
+          int X_tmp = 0, Y_tmp = 0, tmp_stepSize = (sizeStep + round(sizeStep * errore_cord_share));
+          switch(tmp_top) {
+          case 1:
+            switch(rotY / 45) {
+            case 1: 
             case 2:
-              switch(rotY / 45) {
-              case 1: 
-              case 2:
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;        // 90
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2; 
-                tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * j;
-                tmp_Y_min = Y_tmp - tmp_stepSize * (h + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * h;
-                break;
-              case 3: 
-              case 4:
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;        // 180
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2; 
-                tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * h;
-                tmp_Y_min = Y_tmp + tmp_stepSize * j;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (j + 1);
-                break;
-              case 5: 
-              case 6:
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;        // 270
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2; 
-                tmp_X_min = X_tmp + tmp_stepSize * j;
-                tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
-                tmp_Y_min = Y_tmp + tmp_stepSize * h;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (h + 1);
-                break;
-              default:
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;        // 0
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2; 
-                tmp_X_min = X_tmp + tmp_stepSize * h;
-                tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
-                tmp_Y_min = Y_tmp - tmp_stepSize * (j + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * j;
-                break;
-              }
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;       // 90
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * j;
+              tmp_Y_min = Y_tmp + tmp_stepSize * h;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (h + 1);
               break;
-            case 3:
-              if (rotX > 180) {
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * h;
-                tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
-                tmp_Y_min = Y_tmp + tmp_stepSize * i;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
-              } else {
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * h;
-                tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * i;
-              }
-              break;
+            case 3: 
             case 4:
-              if (rotX > 180) {
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * j;
-                tmp_Y_min = Y_tmp + tmp_stepSize * i;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
-              } else {
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * j;
-                tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
-                tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * i;
-              }
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;       // 180
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * h;
+              tmp_Y_min = Y_tmp - tmp_stepSize * (j + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * j;
               break;
-            case 5:
-              if (rotX > 180) {
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * h;
-                tmp_Y_min = Y_tmp + tmp_stepSize * i;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
-              } else {
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * h;
-                tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
-                tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * i;
-              }
-              break;
+            case 5: 
             case 6:
-              if (rotX > 180) {
-                X_tmp = (displayWidth - tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp + tmp_stepSize * j;
-                tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
-                tmp_Y_min = Y_tmp + tmp_stepSize * i;
-                tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
-              } else {
-                X_tmp = (displayWidth + tmp_stepSize * size) / 2;
-                Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
-                tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
-                tmp_X_max = X_tmp - tmp_stepSize * j;
-                tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
-                tmp_Y_max = Y_tmp - tmp_stepSize * i;
-              }
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;       // 270
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * j;
+              tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
+              tmp_Y_min = Y_tmp - tmp_stepSize * (h + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * h;
+              break;
+            default:
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;       // 0
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * h;
+              tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
+              tmp_Y_min = Y_tmp + tmp_stepSize * j;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (j + 1);
               break;
             }
+            break;
+          case 2:
+            switch(rotY / 45) {
+            case 1: 
+            case 2:
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;        // 90
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2; 
+              tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * j;
+              tmp_Y_min = Y_tmp - tmp_stepSize * (h + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * h;
+              break;
+            case 3: 
+            case 4:
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;        // 180
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2; 
+              tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * h;
+              tmp_Y_min = Y_tmp + tmp_stepSize * j;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (j + 1);
+              break;
+            case 5: 
+            case 6:
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;        // 270
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2; 
+              tmp_X_min = X_tmp + tmp_stepSize * j;
+              tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
+              tmp_Y_min = Y_tmp + tmp_stepSize * h;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (h + 1);
+              break;
+            default:
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;        // 0
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2; 
+              tmp_X_min = X_tmp + tmp_stepSize * h;
+              tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
+              tmp_Y_min = Y_tmp - tmp_stepSize * (j + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * j;
+              break;
+            }
+            break;
+          case 3:
+            if (rotX > 180) {
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * h;
+              tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
+              tmp_Y_min = Y_tmp + tmp_stepSize * i;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
+            } else {
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * h;
+              tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * i;
+            }
+            break;
+          case 4:
+            if (rotX > 180) {
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * j;
+              tmp_Y_min = Y_tmp + tmp_stepSize * i;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
+            } else {
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * j;
+              tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
+              tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * i;
+            }
+            break;
+          case 5:
+            if (rotX > 180) {
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (h + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * h;
+              tmp_Y_min = Y_tmp + tmp_stepSize * i;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
+            } else {
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * h;
+              tmp_X_max = X_tmp + tmp_stepSize * (h + 1);
+              tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * i;
+            }
+            break;
+          case 6:
+            if (rotX > 180) {
+              X_tmp = (displayWidth - tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight - tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp + tmp_stepSize * j;
+              tmp_X_max = X_tmp + tmp_stepSize * (j + 1);
+              tmp_Y_min = Y_tmp + tmp_stepSize * i;
+              tmp_Y_max = Y_tmp + tmp_stepSize * (i + 1);
+            } else {
+              X_tmp = (displayWidth + tmp_stepSize * size) / 2;
+              Y_tmp = (displayHeight + tmp_stepSize * size) / 2;
+              tmp_X_min = X_tmp - tmp_stepSize * (j + 1);
+              tmp_X_max = X_tmp - tmp_stepSize * j;
+              tmp_Y_min = Y_tmp - tmp_stepSize * (i + 1);
+              tmp_Y_max = Y_tmp - tmp_stepSize * i;
+            }
+            break;
+          }
 
-            if (mouseX > tmp_X_min && mouseX < tmp_X_max && mouseY > tmp_Y_min && mouseY < tmp_Y_max) {
-              if (namberClick >= 2) {
+          if (mouseX > tmp_X_min && mouseX < tmp_X_max && mouseY > tmp_Y_min && mouseY < tmp_Y_max) {
+            if (namberClick >= 2) {
+              if (outToken(input[i][j][h]) == false) {                                                        
                 byte search = move;
                 //int vinCounter = 1;
                 activeSize = size;
+                activeInput = true;
                 input[i][j][h] = search;
                 namberClick = 0;
                 if (++move > namberPlayers) move = 1;
-                activeInput = true;
+                timer = millis();
                 //flag_no_draw = flag_no_draw_before;
-
+  
                 if (search_vin(i, j, h, 0, 0, 1, search) >= vinNamber) vin = true;    // 1
                 if (search_vin(i, j, h, 0, 1, 0, search) >= vinNamber) vin = true;    // 2
                 if (search_vin(i, j, h, 0, 1, 1, search) >= vinNamber) vin = true;    // 3
@@ -287,10 +291,13 @@ void contropOutGO() {
                 if (search_vin(i, j, h, -1, 1, 1, search) >= vinNamber) vin = true;   // 11
                 if (search_vin(i, j, h, -1, -1, 1, search) >= vinNamber) vin = true;  // 12
                 if (search_vin(i, j, h, 1, -1, -1, search) >= vinNamber) vin = true;  // 13
-              } else {
-                outToken(byte(move + 4));
+              }else{
+                namberClick = 0;
               }
+            } else if (input[i][j][h] == 0) {     
+              outToken(byte(move + 4));
             }
+            
           }
         }
         translate(sizeStep, 0, 0);

@@ -14,7 +14,7 @@ void mouseWheel(MouseEvent event) {
         ++activeSize;
       }
     }
-  } else {
+  } else { 
     if (keyCode == SHIFT) {
       sizeStep -= 5;
       if (sizeStep < 3) {
@@ -34,7 +34,7 @@ void mouseWheel(MouseEvent event) {
 void mouseClicked() {
   if (activeInput == false) {
     ++namberClick;
-    counterClick = millis() + 500;
+    counterClick = millis() + 300;
   }
   //MySliderClick = true;
 }

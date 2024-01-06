@@ -12,7 +12,8 @@ void controlOutPlay() {
   //stroke(0, 0, 255);
   //box(0, 0, 3000);
 
-  stroke(255, 0, 0, 125); 
+  //stroke(255, 0, 0, 125); 
+  stroke(255, 0, 0, 100); 
   {
     int tmpSize = (top == topBefore ? activeSize : size);
     switch(top) {
@@ -36,7 +37,6 @@ void controlOutPlay() {
       box(sizeStep * size + 1, sizeStep + 1, sizeStep * size + 1);
       box(sizeStep * size, sizeStep, sizeStep * size);
       translate(0, (size - tmpSize) * -sizeStep + sizeStep * (size - 1) / 2, 0);
-      //outTopBox(sizeStep * size, sizeStep, sizeStep * size, 0, (size - tmpSize) * sizeStep + sizeStep * (size - 1) / -2, 0);
       break;
     case 4:
       translate((size - tmpSize) * sizeStep + sizeStep * (size - 1) / -2, 0, 0);
@@ -99,10 +99,12 @@ void controlOutPlay() {
         }
         for (int h = 0; h < maxH; ++h) {
           if (!(h < minH)) {
-            if (flag_no_draw == false && input[i][j][h] != 5) {
+            if (flag_no_draw == false && input[i][j][h] != 9) {
               box(sizeStep, sizeStep, sizeStep);
             }
-            outToken(input[i][j][h]);
+            if(input[i][j][h] != 9 || ((topBefore == 1 && i == maxI - 1) || (topBefore == 2 && i == minI) || (topBefore == 3 && j == minJ) || (topBefore == 4 && h == minH) || (topBefore == 5 && j == maxJ - 1) || (topBefore == 6 && h == maxH - 1 ))){
+              outToken(input[i][j][h]);
+            }
           }
           translate(sizeStep, 0, 0);
         }
@@ -150,6 +152,11 @@ boolean outToken(byte type) {
   case 8:
     stroke(255, 127, 255, 30);
     break;
+  default:
+    stroke(140, 140, 140);
+    sphere(sizeStep / 8.0);
+    stroke(0, 20);
+    return true;
   }
 
 

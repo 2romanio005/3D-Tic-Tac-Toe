@@ -1,7 +1,9 @@
 
-int size = 1;       // размер куба(клеток)
-int vinNamber = 1;  // количество одинаковых в ряд для победы
-float speed = 0.75; // скорость кручения(от 0 до 1)
+int size = 1;           // размер куба(клеток)
+int vinNamber = 1;      // количество одинаковых в ряд для победы
+byte voidPercent = 0;   // процент пустых ячеек
+int timeMax = 0;        // время на ход у каждого игрока
+float speed = 0.75;     // скорость кручения(от 0 до 1)
 byte namberPlayers = 2; //количество игроков
 
 int sizeStep = 33;  // размер одной клетки куба(в пикселях)
@@ -23,6 +25,7 @@ byte top = 4;
 byte topBefore = 4;
 
 byte [][][] input = new byte[size][size][size];
+long timer = 0, timerStop = 0;
 
 int namberClick = 0;
 long counterClick;
@@ -34,26 +37,15 @@ boolean flag_load_vin = false;
 
 MySlider sizeSlider = new MySlider("Размер поля", 8.0, 1.0, 50.0, 1.0);
 MySlider vinNamberSlider = new MySlider("Требуется в ряд для победы", 5.0, 1.0, 8.0, 1.0);
+MySlider voidSlider = new MySlider("Процент отсутствующих клеточек", 0.0, 0.0, 100.0, 1.0);
+MySlider timeSlider = new MySlider("Секунд на ход", 0.0, 0.0, 120, 1.0);
 MySlider namberPlayersSlider = new MySlider("Количество игроков", 2.0, 2.0, 4.0, 1.0);
 MySlider speedSlider = new MySlider("Чувствительность прокрутки", 0.75, 0.1, 2.0, 0.01);
-MySlider voidSlider = new MySlider("Процент отсутствующих клеточек", 0.0, 0.0, 100.0, 1.0);
 
 
 
 void reset() {
-  if (flag_load == false) {
-    for (int i = 0; i < size; ++i) {
-      for (int j = 0; j < size; ++j) {
-        for (int h = 0; h < size; ++h) {
-          input[i][j][h] = 0;
-        }
-      }
-    }
-    move = 1;
-  }
   flag_load = false;
-
-
 
   flag_no_draw = false;
   namberClick = 0;

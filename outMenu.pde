@@ -1,20 +1,27 @@
  //<>//
 void play() {
-  size = int(sizeSlider.getValue());
-  
-  
+  voidPercent = byte(voidSlider.getValue());
+
   if (flag_load == false) {
+    move = 1;
+    size = int(sizeSlider.getValue());
+    
     input = new byte[size][size][size];
-    int tmp = int(voidSlider.getValue());
     for(byte i = 0; i < size; ++i){
       for(byte j = 0; j < size; ++j){
         for(byte h = 0; h < size; ++h){
-          if(int(random(100)) < tmp) input[i][j][h] = 5;
+          if(byte(random(100)) < voidPercent) {
+            input[i][j][h] = 9;
+          }else{
+            input[i][j][h] = 0;
+          }
         }  
       }  
-    }  
+    } 
+    timer = millis();
   }
   
+  timeMax = int(timeSlider.getValue()) * 1000;
   vinNamber = int(vinNamberSlider.getValue());
   namberPlayers = byte(namberPlayersSlider.getValue());
   speed = speedSlider.getValue();
@@ -32,22 +39,27 @@ void play() {
 }
 
 void save() {
-  String[] save = new String[2];
+  String[] save = new String[3];
 
   save[0]  = Integer.toString(size) + ';';
   save[0] += Integer.toString(vinNamber) + ';';
+  save[0] += Byte.toString(voidPercent) + ';';
+  save[0] += Integer.toString(timeMax) + ';';
   save[0] += Byte.toString(namberPlayers) + ';';
   save[0] += Float.toString(speed) + ';';
-  save[0] += Byte.toString(move) + ';';
+  
   if (vin) {
     save[0] += '1';
   }
+  
+  save[1]  = Byte.toString(move) + ';';
+  save[1] += Long.toString(timerStop) + ';';
 
-  save[1] = "";
+  save[2] = "";
   for (int i = 0; i < size; ++i) {
     for (int j = 0; j < size; ++j) {
       for (int h = 0; h < size; ++h) {
-        save[1] += Byte.toString(input[i][j][h]) + ';';
+        save[2] += Byte.toString(input[i][j][h]) + ';';
       }
     }
   }
@@ -86,10 +98,10 @@ void load() {
 
   if (load != null) {
     //println(load[0].charAt(0));
-    int iter = 1;
+    int iter = 0;
 
     String loadString = "";
-    char laodChar = load[0].charAt(0);
+    char laodChar = load[0].charAt(iter++);
     while (laodChar != ';') {
       loadString += laodChar;
       laodChar = load[0].charAt(iter++);
@@ -112,6 +124,22 @@ void load() {
       loadString += laodChar;
       laodChar = load[0].charAt(iter++);
     }
+    voidSlider.setValue(float(Byte.parseByte(loadString)));
+
+    loadString = "";
+    laodChar = load[0].charAt(iter++);
+    while (laodChar != ';') {
+      loadString += laodChar;
+      laodChar = load[0].charAt(iter++);
+    }
+    timeSlider.setValue(Integer.parseInt(loadString) / 1000.0);
+
+    loadString = "";
+    laodChar = load[0].charAt(iter++);
+    while (laodChar != ';') {
+      loadString += laodChar;
+      laodChar = load[0].charAt(iter++);
+    }
     namberPlayersSlider.setValue(float(Byte.parseByte(loadString)));
 
     loadString = "";
@@ -122,17 +150,29 @@ void load() {
     }
     speedSlider.setValue(Float.parseFloat(loadString));
 
-    loadString = "";
-    laodChar = load[0].charAt(iter++);
-    while (laodChar != ';') {
-      loadString += laodChar;
-      laodChar = load[0].charAt(iter++);
-    }    
-    move = Byte.parseByte(loadString);
 
     if (iter != load[0].length()) {
       flag_load_vin = true;
     }
+    
+    
+    iter = 0;
+    loadString = "";
+    laodChar = load[1].charAt(iter++);
+    while (laodChar != ';') {
+      loadString += laodChar;
+      laodChar = load[1].charAt(iter++);
+    }    
+    move = Byte.parseByte(loadString);
+    
+    loadString = "";
+    laodChar = load[1].charAt(iter++);
+    while (laodChar != ';') {
+      loadString += laodChar;
+      laodChar = load[1].charAt(iter++);
+    }    
+    timer = millis() - Long.parseLong(loadString);
+    println(millis());
 
 
     iter = 0;
@@ -140,10 +180,10 @@ void load() {
       for (int j = 0; j < size; ++j) {
         for (int h = 0; h < size; ++h) {
           loadString = "";
-          laodChar = load[1].charAt(iter++);
+          laodChar = load[2].charAt(iter++);
           while (laodChar != ';') {
             loadString += laodChar;
-            laodChar = load[1].charAt(iter++);
+            laodChar = load[2].charAt(iter++);
           }
           input[i][j][h] = Byte.parseByte(loadString);
         }
@@ -220,7 +260,7 @@ void outPlayers() {
   text("Очередь ходов:", displayWidth - 20, 85);
   textSize(26);
   text("Требуется в ряд для победы: " + vinNamber, displayWidth - 20, 40);
-  for (byte i = 0; i < namberPlayers; ++i) {
+  for (int i = namberPlayers - 1; i >= 0; --i) {
     switch((move - 1 + i) % namberPlayers) {
     case 0:
       fill(0, 255, 0);
@@ -241,8 +281,9 @@ void outPlayers() {
     }
   }
 
-
+  textAlign(CENTER);
   textSize(35);
+  if(timeMax != 0) text((timer + timeMax - millis()) / 1000.0, displayWidth / 2, 200);
   noFill();
 }
 
@@ -262,13 +303,13 @@ class MySlider {
     this.max = max;
   }
 
-  public void setSize(int startX, int startY, int sizeX, int sizeY) {
-    this.startX = startX;
-    this.startY = startY;
-    this.sizeX = sizeX;
-    this.sizeY = sizeY;
+  public void setSize(float startX, float startY, float sizeX, float sizeY) {
+    this.startX = round(startX);
+    this.startY = round(startY);
+    this.sizeX = round(sizeX);
+    this.sizeY = round(sizeY);
 
-    pixel_step = float(sizeX) / (round((max - min) / step));
+    pixel_step = (sizeX) / (round((max - min) / step));
     nowX = (value - min) * pixel_step / step;
   }
 
